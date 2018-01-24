@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_scrollFlags="scroll|enterAlways"/>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="@drawable/my_girl"
+        >
+
+        <TextView
+            android:id="@+id/tv_main"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="主页"
+            android:gravity="center"
+            android:drawableTop="@drawable/select_btn"
+            android:drawablePadding="0dp"
+            android:textSize="10sp"
+            android:textColor="@color/select_text"/>
+
+
+        <TextView
+            android:id="@+id/tv_dis"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="发现"
+            android:textColor="@color/select_text"
+            android:drawableTop="@drawable/select_btn"
+            android:drawablePadding="0dp"
+            android:gravity="center"
+            android:textSize="10sp"
+            />
+        <TextView
+            android:id="@+id/tv_setting"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="设置"
+            android:textColor="@color/select_text"
+            android:drawableTop="@drawable/select_btn"
+            android:drawablePadding="0dp"
+            android:gravity="center"
+            android:textSize="10sp"
+            />
+    </LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="text" format="string"/>
+    <attr name="textSize" format="dimension"/>
+    <attr name="textOriginColor" format="color|reference"/>
+    <attr name="textChangeColor" format="color|reference"/>
+    <attr name="progress" format="float"/>
+    <attr name="direction">
+        <enum name="left" value="0"/>
+        <enum name="right" value="1"/>
+    </attr>
+    <declare-styleable name="ColorTrackView">
+        <attr name="text"/>
+        <attr name="textSize"/>
+        <attr name="textOriginColor" />
+        <attr name="textChangeColor" />
+        <attr name="progress" />
+        <attr name="direction"/>
+    </declare-styleable>
+</resources>

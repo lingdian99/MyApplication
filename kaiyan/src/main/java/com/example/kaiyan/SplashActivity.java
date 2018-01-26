@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class SplashActivity extends AppCompatActivity{
+
     private static final String TAG="SplashActivity";
     private int time=4;
     final Handler handler=new Handler(){

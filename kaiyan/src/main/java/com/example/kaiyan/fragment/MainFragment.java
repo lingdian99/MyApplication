@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.kaiyan.R;
 import com.example.kaiyan.adapter.MyRvAdapter;
-import com.example.kaiyan.bean.HomepageBeen;
+import com.example.kaiyan.bean.HomepageBean;
 import com.example.kaiyan.constants.HttpApiConstants;
 import com.example.kaiyan.http.AppClient;
 
@@ -30,8 +30,8 @@ import retrofit2.Response;
 
 public class MainFragment extends Fragment{
     private final String TAG=this.getClass().getName();
-    private List<HomepageBeen.ItemListBean> mItemList;
-    private List<HomepageBeen.ItemListBean> mVideoItemList;
+    private List<HomepageBean.ItemListBean> mItemList;
+    private List<HomepageBean.ItemListBean> mVideoItemList;
     private RecyclerView mRecyclerview;
     private View view;
     private MyRvAdapter myRvAdapter;
@@ -76,14 +76,16 @@ public class MainFragment extends Fragment{
     //加载网络数据
     private void getHttpHomepage(String url){
         AppClient.ApiHomepage apiHomepage=AppClient.retrofit("http://www.baidu.com").create(AppClient.ApiHomepage.class);
-        Call<HomepageBeen> call=apiHomepage.getHomepage(url);
-        call.enqueue(new Callback<HomepageBeen>() {
+        Call<HomepageBean> call=apiHomepage.getHomepage(url);
+        call.enqueue(new Callback<HomepageBean>() {
             @Override
-            public void onResponse(Call<HomepageBeen> call, Response<HomepageBeen> response) {
+            public void onResponse(Call<HomepageBean> call, Response<HomepageBean> response) {
                 mItemList=response.body().getItemList();
                 for (int i = 0; i < mItemList.size(); i++) {
                     if (mItemList.get(i).getType().equals("video")){
                         mVideoItemList.add(mItemList.get(i));
+                    }else if (mItemList.get(i).getType().equals("videoCollectionWithCover")){
+                        Log.e(TAG, "MyInnerBanner: "+mItemList.get(i).getData().getItemList().get(0).getData().getTitle());
                     }
                 }
                 initUi();
@@ -91,9 +93,10 @@ public class MainFragment extends Fragment{
             }
 
             @Override
-            public void onFailure(Call<HomepageBeen> call, Throwable t) {
+            public void onFailure(Call<HomepageBean> call, Throwable t) {
 
             }
         });
     }
+
 }

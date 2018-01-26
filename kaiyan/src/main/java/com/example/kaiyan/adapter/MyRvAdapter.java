@@ -2,7 +2,6 @@ package com.example.kaiyan.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.kaiyan.R;
-import com.example.kaiyan.bean.HomepageBeen;
+import com.example.kaiyan.bean.HomepageBean;
 
 import java.util.List;
 
@@ -21,19 +20,34 @@ import java.util.List;
 
 public class MyRvAdapter extends RecyclerView.Adapter{
     private View mItemView;
+    //头部banner
+    private View headerView;
     private Context mContext;
-    private List<HomepageBeen.ItemListBean> mItemList;
+    private List<HomepageBean.ItemListBean> mItemList;
     private MyOnClickListener myOnClickListener;
+    //顶部header
+    private static final int HEADER_VIEW_TYPE=1;
 
-    public MyRvAdapter(Context context,List<HomepageBeen.ItemListBean> mItemList){
+    public MyRvAdapter(Context context,List<HomepageBean.ItemListBean> mItemList){
         this.mContext=context;
         this.mItemList=mItemList;
+    }
+
+    public void setHeaderView(View view){
+        this.headerView=view;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mItemView=LayoutInflater.from(mContext).inflate(R.layout.main_item_layout,parent,false);
-        return new MyViewHolder(mItemView);
+        switch (viewType){
+            case 0:
+                return new MyViewHolder(mItemView);
+            case HEADER_VIEW_TYPE:
+                return new MyHeaderView(headerView);
+            default:
+                return new MyViewHolder(mItemView);
+        }
     }
 
     @Override
@@ -57,6 +71,9 @@ public class MyRvAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemViewType(int position) {
+        if (position==0){
+            return HEADER_VIEW_TYPE;
+        }
         return super.getItemViewType(position);
     }
 
@@ -80,6 +97,14 @@ public class MyRvAdapter extends RecyclerView.Adapter{
                     }
                 }
             });
+        }
+
+    }
+
+    class MyHeaderView extends RecyclerView.ViewHolder{
+
+        public MyHeaderView(View itemView) {
+            super(itemView);
         }
     }
 

@@ -16,8 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.kaiyan.R;
 import com.example.kaiyan.adapter.MyBannerAdapter;
-import com.example.kaiyan.bean.BannerVideoBeen;
-import com.example.kaiyan.bean.HomepageBeen;
+import com.example.kaiyan.bean.HomepageBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ public class BannerView extends FrameLayout {
     private Handler mHandler=new Handler();
     private OnBannerClick onBannerClick;
 //    private List<TodayNewsList.TopStoriesBean> itemListBeans=new ArrayList<>();
-    private List<BannerVideoBeen.ItemListBean.DataBeanX.ItemListBannerBean> itemListBeans;
+    private List<HomepageBean.ItemListBean> itemListBeans;
 
     public BannerView(Context context) {
         this(context, null);
@@ -56,7 +55,7 @@ public class BannerView extends FrameLayout {
         itemListBeans=new ArrayList<>();
     }
 
-    public void setBeen(List<BannerVideoBeen.ItemListBean.DataBeanX.ItemListBannerBean> itemListBeans){
+    public void setBeen(List<HomepageBean.ItemListBean> itemListBeans){
         this.itemListBeans=itemListBeans;
         views.clear();
         initUI();

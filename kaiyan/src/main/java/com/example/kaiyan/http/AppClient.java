@@ -1,6 +1,7 @@
 package com.example.kaiyan.http;
 
-import com.example.kaiyan.bean.HomepageBeen;
+import com.example.kaiyan.bean.BannerVideoBean;
+import com.example.kaiyan.bean.HomepageBean;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -24,6 +25,11 @@ public class AppClient {
 
     public interface ApiHomepage{
         @GET()
-        Call<HomepageBeen> getHomepage(@Url String url);
+        Call<HomepageBean> getHomepage(@Url String url);
+    }
+
+    public interface ApiBannerPage{
+        @GET()
+        Call<BannerVideoBean> getBannerVideo(@Url String url);
     }
 }

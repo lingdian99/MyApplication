@@ -1,5 +1,6 @@
 package com.example.zhihuribao.main.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Matrix;
 import android.graphics.RectF;
@@ -18,7 +19,9 @@ import android.widget.ImageView;
  * @author zhy
  *         博客地址：http://blog.csdn.net/lmj623565791/article/details/39474553
  */
+@SuppressLint("AppCompatCustomView")
 public class MyImageView extends ImageView implements OnScaleGestureListener, OnTouchListener, ViewTreeObserver.OnGlobalLayoutListener {
+    private static final String TAG="MyImageView";
     //整个界面的宽高
     private int mWidth, mHeight;
     //图片的宽高
@@ -29,6 +32,14 @@ public class MyImageView extends ImageView implements OnScaleGestureListener, On
     private float scale = 1.0f;
     private float mMaxScale, mMinScale;
     private ScaleGestureDetector scaleGestureDetector;
+    //当前手指按下时的x，y
+    private int curX,curY;
+    private int startX,startY;
+
+    private MODE mode=MODE.NONE;
+    private enum MODE{
+        NONE,DRAG,ZOOM
+    }
 
 
     public MyImageView(Context context) {
@@ -124,8 +135,33 @@ public class MyImageView extends ImageView implements OnScaleGestureListener, On
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        return scaleGestureDetector.onTouchEvent(event);
+//        return scaleGestureDetector.onTouchEvent(event);
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                onTouchDown(event);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                onTouchMove(event);
+                break;
+        }
+        return true;
     }
+
+    private void onTouchDown(MotionEvent event){
+        curX= (int) event.getRawX();
+        curY= (int) event.getRawX();
+        startX=curX;
+        startY=curY;
+    }
+
+    private void onTouchMove(MotionEvent event){
+        curX= (int) event.getRawX();
+        curY= (int) event.getRawY();
+        matrix.postTranslate(curX-startX,curY-startY);
+        setImageMatrix(matrix);
+        Log.e(TAG, "curX: "+curX+"-----curY:"+curY);
+    }
+
 
     @Override
     public void onGlobalLayout() {

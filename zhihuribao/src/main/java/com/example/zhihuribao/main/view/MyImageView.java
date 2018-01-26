@@ -93,6 +93,7 @@ public class MyImageView extends ImageView implements OnScaleGestureListener, On
         RectF rectF = getRectF();
         float dx = 0.0f;
         float dy = 0.0f;
+
         //图片高度大于界面的高度
         if (rectF.height() >= mHeight) {
             //图片顶部存在空白
